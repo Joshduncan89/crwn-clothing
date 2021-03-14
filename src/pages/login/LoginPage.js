@@ -5,9 +5,10 @@ import Register from "../../components/signIn/Register";
 
 const LoginPage = () => {
   return (
-    <div>
+    <>
       <Signin />
-    </div>
+      <Register />
+    </>
   );
 };
 
