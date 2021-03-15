@@ -6,8 +6,10 @@ import Register from "../../components/signIn/Register";
 const LoginPage = () => {
   return (
     <>
-      <Signin />
-      <Register />
+      <div className='sign-in-and-sign-up'>
+        <Signin />
+        <Register />
+      </div>
     </>
   );
 };

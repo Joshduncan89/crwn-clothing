@@ -1,65 +1,97 @@
 import React, { useState } from "react";
+import FormInput from "../formElements/FormInput";
+import CustomButton from "../formElements/CustomButton";
+import "./Sign-In.styles.scss";
+import { auth, createUserProfile } from "../../firebase/firebase.utils";
 
 const Register = () => {
   const [registerUser, setRegisterUser] = useState({
-    userName: "",
+    displayName: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { userName, email, password, password2 } = registerUser;
+  const { displayName, email, password, password2 } = registerUser;
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(registerUser);
+
+    if (password !== password2) {
+      alert("password doesnt match");
+      return;
+    }
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await createUserProfile(user, { displayName });
+
+      setRegisterUser({
+        displayName: "",
+        email: "",
+        password: "",
+        password2: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const changeHandler = (e) => {
-    return setRegisterUser(...registerUser, {
+    setRegisterUser({
+      ...registerUser,
       [e.target.name]: e.target.value,
     });
   };
 
   return (
-    <div className='sign-in'>
-      <h2>Register an account</h2>
-
+    <div className='sign-up'>
+      <h2>I do not have an account</h2>
+      <span>Register an account</span>
       <form onSubmit={submitHandler}>
-        <label htmlFor='userName'>Username</label>
-        <input
-          type='userName'
-          name='userName'
+        <FormInput
+          label='User Name'
+          type='text'
+          name='displayName'
           required
-          value={userName}
+          value={displayName}
           onChange={changeHandler}
         />
-        <label htmlFor='email'>Email</label>
-        <input
+
+        <FormInput
+          label='Email'
           type='email'
           name='email'
           required
           value={email}
           onChange={changeHandler}
         />
-        <label htmlFor='password'>Password</label>
-        <input
+
+        <FormInput
+          label='Password'
           type='password'
           name='password'
           required
           value={password}
           onChange={changeHandler}
         />
-        <label htmlFor='password2'>Password</label>
-        <input
-          type='password2'
+
+        <FormInput
+          label='Confirm Password'
+          type='password'
           name='password2'
           required
           value={password2}
           onChange={changeHandler}
         />
-
-        <input type='submit' value='Submit Form' />
+        <div className='buttons'>
+          <CustomButton type='submit' onClick={changeHandler}>
+            {" "}
+            Register Account
+          </CustomButton>
+        </div>
       </form>
     </div>
   );

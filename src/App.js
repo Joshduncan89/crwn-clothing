@@ -10,7 +10,7 @@ import { useGoogleUser } from "./firebase/firebaseHooks";
 
 function App() {
   const currentUser = useGoogleUser();
-  console.log(currentUser);
+  console.log(currentUser, "app component");
 
   return (
     <Router>
