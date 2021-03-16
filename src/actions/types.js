@@ -1,1 +1,2 @@
 export const LOGIN_USER = "LOGIN_USER";
+export const TOGGLE_CART_HIDDEN = "TOGGLE_CART_HIDDEN";

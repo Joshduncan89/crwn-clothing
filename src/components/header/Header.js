@@ -1,5 +1,7 @@
 import React from "react";
 import "./Header.styles.scss";
+import CartIconComponent from "../cart/Cart-Icon-Component";
+import CartDropdown from "../cart/CartDropdown";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
@@ -7,8 +9,10 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const authReducer = useSelector((state) => state.authReducer);
-
   const { currentUser } = authReducer;
+
+  const cart = useSelector((state) => state.cartReducer);
+  const { hidden } = cart;
 
   return (
     <div className='header'>
@@ -37,7 +41,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIconComponent />
       </div>
+      {!hidden && <CartDropdown />}
     </div>
   );
 };
