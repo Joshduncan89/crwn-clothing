@@ -14,7 +14,7 @@ function App() {
 
   return (
     <Router>
-      <Header currentUser={currentUser} />
+      <Header />
       <Route path='/shop' component={ShopPage} />
       <Route path='/signin' component={LoginPage} />
       <Route exact path='/' component={HomePage} />

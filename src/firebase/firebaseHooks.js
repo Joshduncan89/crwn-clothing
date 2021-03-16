@@ -1,22 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { auth, createUserProfile } from "./firebase.utils";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "../actions/authActions";
 
 export const useGoogleUser = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
+
+  const authReducer = useSelector((state) => state.authReducer);
+  const { currentUser } = authReducer;
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfile(userAuth);
         userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-          });
+          dispatch(
+            setCurrentUser({
+              id: snapshot.id,
+              ...snapshot.data(),
+            })
+          );
         });
 
         console.log(currentUser, "firebasehook");
       } else {
-        setCurrentUser(userAuth);
+        dispatch(setCurrentUser(userAuth));
       }
     });
     return () => {

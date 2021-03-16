@@ -3,8 +3,13 @@ import "./Header.styles.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
+import { useSelector } from "react-redux";
 
-const Header = ({ currentUser }) => {
+const Header = () => {
+  const authReducer = useSelector((state) => state.authReducer);
+
+  const { currentUser } = authReducer;
+
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
