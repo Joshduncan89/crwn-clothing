@@ -8,7 +8,7 @@ const ShopComponent = () => {
   return (
     <div className='shop-page'>
       {shopCollections.map(({ id, ...otherCollectionProps }) => (
-        <PreviewCollection key={id} {...otherCollectionProps} />
+        <PreviewCollection key={id} id={id} {...otherCollectionProps} />
       ))}
     </div>
   );

@@ -11,8 +11,8 @@ const Header = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const { currentUser } = authReducer;
 
-  const cart = useSelector((state) => state.cartReducer);
-  const { hidden } = cart;
+  const toggleCart = useSelector((state) => state.toggleCartReducer);
+  const { hidden } = toggleCart;
 
   return (
     <div className='header'>
