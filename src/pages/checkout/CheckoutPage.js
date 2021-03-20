@@ -1,0 +1,36 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import "./Checkout.styles.scss";
+import CheckoutItem from "../../components/checkout-item/CheckoutItem";
+
+const CheckoutPage = () => {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  return (
+    <div className='checkout-page'>
+      <div className='checkout-header'>
+        <div className='header-block'>
+          <span>Product</span>
+        </div>
+        <div className='header-block'>
+          <span>Description</span>
+        </div>
+        <div className='header-block'>
+          <span>Quantity</span>
+        </div>
+        <div className='header-block'>
+          <span>Price</span>
+        </div>
+        <div className='header-block'>
+          <span>Remove</span>
+        </div>
+      </div>
+      {cartItems.map((item) => (
+        <CheckoutItem key={item.id} item={item} />
+      ))}
+    </div>
+  );
+};
+
+export default CheckoutPage;
