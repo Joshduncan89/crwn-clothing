@@ -7,6 +7,10 @@ const CheckoutPage = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  const cartTotal = cartItems.reduce((acc, item) => {
+    return acc + item.quantity * item.price;
+  }, 0);
+
   return (
     <div className='checkout-page'>
       <div className='checkout-header'>
@@ -29,6 +33,9 @@ const CheckoutPage = () => {
       {cartItems.map((item) => (
         <CheckoutItem key={item.id} item={item} />
       ))}
+      <div className='total'>
+        <span>Total: ${cartTotal}</span>
+      </div>
     </div>
   );
 };
