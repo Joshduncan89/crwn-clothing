@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router";
 import "./PreviewCollection.style.scss";
 import CollectionItem from "../collection-item/CollectionItem";
 
