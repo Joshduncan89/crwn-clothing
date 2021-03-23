@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import LoginPage from "./pages/login/LoginPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
