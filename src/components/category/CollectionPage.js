@@ -8,7 +8,7 @@ const CollectionPage = ({ match }) => {
   const [title, setTitle] = useState("");
   const collectionName = match.params.collectionId;
   const shop = useSelector((state) => state.shop);
-  const { SHOP_DATA: shopData } = shop;
+  const { collections: shopData } = shop;
 
   useEffect(() => {
     const category = (value) => {

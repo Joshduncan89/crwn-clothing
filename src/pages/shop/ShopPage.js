@@ -1,27 +1,35 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../../components/loading/LoadingSpinner";
 import CollectionsOverview from "../../components/collections-overview/CollectionsOverview";
 import CollectionPage from "../../components/category/CollectionPage";
-import {
-  firestore,
-  getCollectionAndDocuments,
-} from "../../firebase/firebase.utils";
+import { getCollections } from "../../actions/shopActions";
 
 const ShopPage = ({ match }) => {
-  useEffect(() => {
-    const collectionRef = firestore.collection("collections");
+  const dispatch = useDispatch();
 
-    collectionRef.onSnapshot(async (snapshot) => {
-      const collectionData = getCollectionAndDocuments(snapshot);
-      console.log(collectionData);
-    });
-  }, []);
+  const shop = useSelector((state) => state.shop);
+  const { isFetching } = shop;
+
+  useEffect(() => {
+    dispatch(getCollections());
+  }, [dispatch]);
 
   return (
-    <div className='shop-page'>
-      <Route exact path={`${match.path}`} component={CollectionsOverview} />
-      <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
-    </div>
+    <>
+      {isFetching ? (
+        <LoadingSpinner />
+      ) : (
+        <div className='shop-page'>
+          <Route exact path={`${match.path}`} component={CollectionsOverview} />
+          <Route
+            path={`${match.path}/:collectionId`}
+            component={CollectionPage}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
