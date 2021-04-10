@@ -2,6 +2,7 @@ import {
   FETCH_COLLECTIONS_FAILURE,
   FETCH_COLLECTIONS_START,
   FETCH_COLLECTIONS_SUCCESS,
+  FETCH_COLLECTIONS_CATEGORY,
 } from "../actions/types";
 
 export const ShopReducer = (state = { collections: [] }, action) => {
@@ -16,6 +17,12 @@ export const ShopReducer = (state = { collections: [] }, action) => {
         ...state,
         isFetching: false,
         collections: action.payload,
+      };
+    case FETCH_COLLECTIONS_CATEGORY:
+      return {
+        ...state,
+        isFetching: false,
+        category: action.payload,
       };
     case FETCH_COLLECTIONS_FAILURE:
       return {
