@@ -32,7 +32,7 @@ const CollectionPage = ({ match }) => {
             {collection.map((item) => (
               <CollectionItem
                 item={item}
-                key={item.id}
+                key={item._id}
                 className='collection-item'
               />
             ))}

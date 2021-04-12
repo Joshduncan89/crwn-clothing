@@ -9,8 +9,8 @@ const Collections = () => {
   return (
     <div className='collections-overview'>
       {collections
-        ? Object.values(collections).map(({ id, ...otherCollectionProps }) => (
-            <PreviewCollection key={id} id={id} {...otherCollectionProps} />
+        ? Object.values(collections).map(({ _id, ...otherCollectionProps }) => (
+            <PreviewCollection key={_id} id={_id} {...otherCollectionProps} />
           ))
         : []}
     </div>

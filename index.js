@@ -2,15 +2,22 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const shopRoutes = require("./routes/shopRoutes");
+const connectDb = require("./config/db");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
 
 dotenv.config();
 
+connectDb();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/shop", shopRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

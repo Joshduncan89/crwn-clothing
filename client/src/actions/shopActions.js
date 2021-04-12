@@ -55,16 +55,3 @@ export const getProducts = () => async (dispatch) => {
     dispatch(fetchCollectionsFailure(error));
   }
 };
-
-export const getCollection = (value) => async (dispatch) => {
-  try {
-    dispatch(fetchCollectionsStart());
-
-    const { data } = await axios.get(`/api/shop/${value}`);
-    console.log(data);
-
-    dispatch(fetchCollectionsCategory(data));
-  } catch (error) {
-    dispatch(fetchCollectionsFailure(error));
-  }
-};
