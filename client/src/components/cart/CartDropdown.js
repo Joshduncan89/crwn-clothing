@@ -17,7 +17,7 @@ const CartDropdown = ({ history }) => {
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <CartItem
-              key={item.id}
+              key={item._id}
               name={item.name}
               price={item.price}
               imageUrl={item.imageUrl}

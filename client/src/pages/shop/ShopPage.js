@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/loading/LoadingSpinner";
 import CollectionsOverview from "../../components/collections-overview/CollectionsOverview";
 import CollectionPage from "../../components/category/CollectionPage";
+import CollectionProduct from "../../components/collection-product/CollectionProduct";
 import { getProducts } from "../../actions/shopActions";
 
 const ShopPage = ({ match }) => {
   const dispatch = useDispatch();
-
   const shop = useSelector((state) => state.shop);
   const { isFetching } = shop;
 
@@ -27,6 +27,11 @@ const ShopPage = ({ match }) => {
             exact
             path={`${match.path}/:collectionId`}
             component={CollectionPage}
+          />
+          <Route
+            exact
+            path={`${match.path}/product/:itemId`}
+            component={CollectionProduct}
           />
         </div>
       )}

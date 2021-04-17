@@ -27,7 +27,7 @@ const CollectionPage = ({ match }) => {
     <>
       {obj && (
         <div className='collection-page'>
-          <div className='title'>{title}</div>
+          <div className='title'>{title.toUpperCase()}</div>
           <div className='items'>
             {collection.map((item) => (
               <CollectionItem

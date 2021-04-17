@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import "./CollectionItem.styles.scss";
 import CustomButton from "../formElements/CustomButton";
 import { addItemToCart } from "../../actions/cartActions";
@@ -17,9 +18,16 @@ const CollectionItem = ({ item }) => {
         <span className='name'>{item.name}</span>
         <span className='price'>{item.price}</span>
       </div>
-      <CustomButton inverted onClick={() => dispatch(addItemToCart(item))}>
-        ADD TO CART
-      </CustomButton>
+      <div className='buttons'>
+        <Link to={`/shop/product/${item._id}`}>
+          <CustomButton view inverted>
+            VIEW
+          </CustomButton>
+        </Link>
+        <CustomButton inverted onClick={() => dispatch(addItemToCart(item))}>
+          ADD TO CART
+        </CustomButton>
+      </div>
     </div>
   );
 };
